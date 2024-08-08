@@ -3,7 +3,8 @@ LINKOPT = lib
 #//--------------------------------------------------
 #// TARGET
 #//--------------------------------------------------
-TARGET=standalone_xip
+TARGET = standalone_xip
+MODULE = myna_eu8
 
 ifneq ($(APP_NAME),)
 BUILD_NAME = $(APP_NAME)
@@ -299,7 +300,7 @@ DEFINE				+=	-DCACHE_XIP
 DEFINE				+=	-DSF_WRITABLE
 DEFINE				+=	-DSDK_SYSTEM_NAME=\"$(SYSTEM)\"
 DEFINE				+=	-DSDK_TARGET_NAME=\"$(TARGET)\"
-OUTPUT				=	$(SYSTEM)_$(TARGET)_$(APP_NAME)
+OUTPUT				=	$(MODULE)_$(TARGET)_$(APP_NAME)
 
 #// -------------------------------------------------
 #// 11AH Features (common)
@@ -428,7 +429,7 @@ READELF				=	$(PREFIX)readelf
 #// --------------------------------------------------
 #// Common Path
 #// --------------------------------------------------
-OUT_PATH			=	out/$(SYSTEM)/$(TARGET)/$(BUILD_NAME)
+OUT_PATH			=	out/$(MODULE)/$(BUILD_NAME)
 OBJ_PATH			=	$(OUT_PATH)/objs
 
 LIB_PATH			=	lib
@@ -445,7 +446,7 @@ UMAC_INC_PATH		= $(LIB_MODEM_INC_PATH)/umac
 
 #// BDF_PATH
 BDF_PATH	=	bdf
-INCLUDE += -I$(BDF_PATH)
+INCLUDE += -Iout/$(MODULE)
 VPATH	+= $(BDF_PATH)
 
 #// --------------------------------------------------

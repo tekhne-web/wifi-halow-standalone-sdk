@@ -63,8 +63,9 @@ ifneq ($(BDF_INPUT), )
 else
 	BDFSYSDATA := $(BDFFOLDER)/$(SYSTEM)/$(SYSTEM)_$(BDFNAME)
 endif
-BDFDATA := $(BDFFOLDER)/$(BDFNAME)
-BDFHDR := $(BDFFOLDER)/$(BDFHEADERNAME)
+BDFOUTFOLDER := ./out/$(SYSTEM)
+BDFDATA := $(BDFOUTFOLDER)/$(BDFNAME)
+BDFHDR := $(BDFOUTFOLDER)/$(BDFHEADERNAME)
 
 ifeq ($(UTARGET), $(filter $(UTARGET),standalone))
 $(info =================================================)
@@ -134,9 +135,11 @@ endif
 
 bdf:
 	@echo "BDFILE = $(BDFSYSDATA)"
+	@mkdir -p $(BDFOUTFOLDER)
 	@cp -f $(BDFSYSDATA) $(BDFDATA)
 	@xxd --include $(BDFDATA) > $(BDFHDR)
-	@sed  -i '1i const' $(BDFHDR)
+	@sed -i 's/out_$(SYSTEM)/bdf/' $(BDFHDR)
+	@sed -i '1i const' $(BDFHDR)
 	@sed -i '/unsigned int/i const' $(BDFHDR)
 	@sed -i '1i #ifndef __BD_H__' $(BDFHDR)
 	@sed -i '2i #define __BD_H__' $(BDFHDR)
