@@ -34,7 +34,7 @@
 
 /**********************************************************************************************/
 
-static bool raspi_model_4 (void)
+static bool raspi_model_4_5 (void)
 {
 	const char *str_file = "/proc/device-tree/model";
 	char model[64];
@@ -52,7 +52,8 @@ static bool raspi_model_4 (void)
 
 	raspi_uart_info("model: %s\n", model);
 
-	if (memcmp(model, "Raspberry Pi 4", 14) == 0)
+	if ((memcmp(model, "Raspberry Pi 4", 14) == 0) ||
+		(memcmp(model, "Raspberry Pi 5", 14) == 0))
 		return true;
 	else
 		return false;
@@ -71,7 +72,7 @@ static int raspi_gpio_base (unsigned *addr)
 		return -errno;
 	}
 
-	if (raspi_model_4())
+	if (raspi_model_4_5())
 		fseek(fp, 8, SEEK_SET);
 	else
 		fseek(fp, 4, SEEK_SET);

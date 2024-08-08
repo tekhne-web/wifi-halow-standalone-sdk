@@ -156,7 +156,7 @@ int raspi_eirq_poll (int timeout)
 					return 1;
 				}
 
-				log_info("%s: read(), ret=%d/%d\n", __func__, ret, sizeof(evdata));
+				log_info("%s: read(), ret=%d/%lu\n", __func__, ret, sizeof(evdata));
 			}
 		}
 	}

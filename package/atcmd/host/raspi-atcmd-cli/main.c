@@ -1122,12 +1122,12 @@ static void raspi_cli_run_loop (raspi_cli_hif_t *hif)
 										{
 											report_time++;
 											nrc_atcmd_data_info(&send, &recv);
-											log_info(" T:%.3lf S:%llu R:%llu\n", cur_time - start_time, send, recv);
+											log_info(" T:%.3lf S:%lu R:%lu\n", cur_time - start_time, send, recv);
 										}
 									}
 
 									nrc_atcmd_data_info(&send, &recv);
-									log_info("DONE: T:%.3lf S:%llu R:%llu\n", cur_time - start_time, send, recv);
+									log_info("DONE: T:%.3lf S:%lu R:%lu\n", cur_time - start_time, send, recv);
 
 									if (mode >= 0)
 									{
@@ -1162,8 +1162,8 @@ static void raspi_cli_run_loop (raspi_cli_hif_t *hif)
 
 				nrc_atcmd_data_info(&send, &recv);
 
-				log_info(" - send : %llu\n", send);
-				log_info(" - recv : %llu\n", recv);
+				log_info(" - send : %lu\n", send);
+				log_info(" - recv : %lu\n", recv);
 				continue;
 			}
 			else if (strcmp(param, " reset") == 0)
@@ -1174,8 +1174,8 @@ static void raspi_cli_run_loop (raspi_cli_hif_t *hif)
 				nrc_atcmd_data_reset();
 				nrc_atcmd_data_info(&send, &recv);
 
-				log_info(" - send : %llu\n", send);
-				log_info(" - recv : %llu\n", recv);
+				log_info(" - send : %lu\n", send);
+				log_info(" - recv : %lu\n", recv);
 				continue;
 			}
 
